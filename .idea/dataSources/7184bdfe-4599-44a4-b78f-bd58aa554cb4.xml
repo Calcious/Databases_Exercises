@@ -11,75 +11,300 @@
     <schema id="5" parent="1" name="mysql"/>
     <schema id="6" parent="1" name="performance_schema"/>
     <schema id="7" parent="1" name="sys"/>
-    <table id="8" parent="2" name="albums"/>
-    <table id="9" parent="2" name="cohort"/>
-    <column id="10" parent="8" name="id">
+    <schema id="8" parent="1" name="employees">
+      <Visible>1</Visible>
+    </schema>
+    <table id="9" parent="2" name="albums"/>
+    <table id="10" parent="2" name="cohort"/>
+    <table id="11" parent="8" name="departments"/>
+    <table id="12" parent="8" name="dept_emp"/>
+    <table id="13" parent="8" name="dept_manager"/>
+    <table id="14" parent="8" name="employees"/>
+    <table id="15" parent="8" name="salaries"/>
+    <table id="16" parent="8" name="titles"/>
+    <column id="17" parent="9" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="11" parent="8" name="artist">
+    <column id="18" parent="9" name="artist">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
       <DefaultExpression>&apos;NONE&apos;</DefaultExpression>
     </column>
-    <column id="12" parent="8" name="song_name">
+    <column id="19" parent="9" name="song_name">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="8" name="release_date">
+    <column id="20" parent="9" name="release_date">
       <Position>4</Position>
       <DataType>year(4)|0</DataType>
     </column>
-    <column id="14" parent="8" name="sales">
+    <column id="21" parent="9" name="sales">
       <Position>5</Position>
       <DataType>float|0</DataType>
     </column>
-    <column id="15" parent="8" name="genre">
+    <column id="22" parent="9" name="genre">
       <Position>6</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="16" parent="8" name="content">
+    <column id="23" parent="9" name="content">
       <Position>7</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="17" parent="8" name="PRIMARY">
+    <key id="24" parent="9" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="18" parent="9" name="id">
+    <column id="25" parent="10" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="19" parent="9" name="name">
+    <column id="26" parent="10" name="name">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="20" parent="9" name="num_students">
+    <column id="27" parent="10" name="num_students">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="21" parent="9" name="start_date">
+    <column id="28" parent="10" name="start_date">
       <Position>4</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="9" name="ending_date">
+    <column id="29" parent="10" name="ending_date">
       <Position>5</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="23" parent="9" name="PRIMARY">
+    <key id="30" parent="10" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <column id="31" parent="11" name="dept_no">
+      <Position>1</Position>
+      <DataType>char(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="11" name="dept_name">
+      <Position>2</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="33" parent="11" name="dept_name">
+      <ColNames>dept_name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="34" parent="11" name="PRIMARY">
+      <ColNames>dept_no</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="35" parent="11" name="dept_name">
+      <ColNames>dept_name</ColNames>
+      <UnderlyingIndexName>dept_name</UnderlyingIndexName>
+    </key>
+    <column id="36" parent="12" name="emp_no">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="12" name="dept_no">
+      <Position>2</Position>
+      <DataType>char(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="12" name="from_date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="12" name="to_date">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="40" parent="12" name="dept_no">
+      <ColNames>dept_no</ColNames>
+    </index>
+    <index id="41" parent="12" name="emp_no">
+      <ColNames>emp_no</ColNames>
+    </index>
+    <key id="42" parent="12" name="PRIMARY">
+      <ColNames>emp_no
+dept_no</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="43" parent="12" name="dept_emp_ibfk_1">
+      <ColNames>emp_no</ColNames>
+      <RefSchemaName>employees</RefSchemaName>
+      <RefTableName>employees</RefTableName>
+      <RefColNames>emp_no</RefColNames>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <foreign-key id="44" parent="12" name="dept_emp_ibfk_2">
+      <ColNames>dept_no</ColNames>
+      <RefSchemaName>employees</RefSchemaName>
+      <RefTableName>departments</RefTableName>
+      <RefColNames>dept_no</RefColNames>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <column id="45" parent="13" name="dept_no">
+      <Position>1</Position>
+      <DataType>char(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="13" name="emp_no">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="13" name="from_date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="13" name="to_date">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="49" parent="13" name="dept_no">
+      <ColNames>dept_no</ColNames>
+    </index>
+    <index id="50" parent="13" name="emp_no">
+      <ColNames>emp_no</ColNames>
+    </index>
+    <key id="51" parent="13" name="PRIMARY">
+      <ColNames>emp_no
+dept_no</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="52" parent="13" name="dept_manager_ibfk_2">
+      <ColNames>dept_no</ColNames>
+      <RefSchemaName>employees</RefSchemaName>
+      <RefTableName>departments</RefTableName>
+      <RefColNames>dept_no</RefColNames>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <foreign-key id="53" parent="13" name="dept_manager_ibfk_1">
+      <ColNames>emp_no</ColNames>
+      <RefSchemaName>employees</RefSchemaName>
+      <RefTableName>employees</RefTableName>
+      <RefColNames>emp_no</RefColNames>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <column id="54" parent="14" name="emp_no">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="14" name="birth_date">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="14" name="first_name">
+      <Position>3</Position>
+      <DataType>varchar(14)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="14" name="last_name">
+      <Position>4</Position>
+      <DataType>varchar(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="14" name="gender">
+      <Position>5</Position>
+      <DataType>enum(&apos;M&apos;, &apos;F&apos;)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="14" name="hire_date">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="60" parent="14" name="PRIMARY">
+      <ColNames>emp_no</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="61" parent="15" name="emp_no">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="15" name="salary">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="15" name="from_date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="15" name="to_date">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="65" parent="15" name="emp_no">
+      <ColNames>emp_no</ColNames>
+    </index>
+    <key id="66" parent="15" name="PRIMARY">
+      <ColNames>emp_no
+from_date</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="67" parent="15" name="salaries_ibfk_1">
+      <ColNames>emp_no</ColNames>
+      <RefSchemaName>employees</RefSchemaName>
+      <RefTableName>employees</RefTableName>
+      <RefColNames>emp_no</RefColNames>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <column id="68" parent="16" name="emp_no">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="69" parent="16" name="title">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="16" name="from_date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="16" name="to_date">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <index id="72" parent="16" name="emp_no">
+      <ColNames>emp_no</ColNames>
+    </index>
+    <key id="73" parent="16" name="PRIMARY">
+      <ColNames>emp_no
+title
+from_date</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="74" parent="16" name="titles_ibfk_1">
+      <ColNames>emp_no</ColNames>
+      <RefSchemaName>employees</RefSchemaName>
+      <RefTableName>employees</RefTableName>
+      <RefColNames>emp_no</RefColNames>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
   </database-model>
 </dataSource>
