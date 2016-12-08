@@ -14,7 +14,7 @@ select first_name, last_name from employees
 where first_name = 'Irena' OR
       first_name = 'Vidya' OR
       first_name = 'Maya' AND
-      gender = 'male' ORDER BY last_name, first_name;
+      gender = 'm' ORDER BY last_name, first_name;
 
 select last_name from employees
 where last_name like 'E%' OR last_name like '%E'
@@ -23,7 +23,7 @@ ORDER BY emp_no DESC;
 select last_name from employees
 where last_name like 'E%' AND last_name like '%E'
 ORDER BY emp_no DESC;
-#
-# select * from employees
-# where hire_date BETWEEN 1990 and 1999 AND birth_date = '%12-25';
+
+select * from employees
+where hire_date LIKE '199%' AND hire_date LIKE '%12-25';
 
