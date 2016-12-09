@@ -28,18 +28,11 @@ FROM roles r LEFT JOIN users u
   ON u.role_id = r.id
 GROUP BY r.name;
 
-
-
-
 SELECT * FROM users;
-
-
 
 USE employees;
 
 SELECT * FROM dept_manager;
 SELECT * FROM departments;
 
-SELECT * FROM dept_manager m
-  JOIN departments d
-    on m.dept_no = d.dept_name;
+SELECT * FROM dept_manager;
