@@ -12,12 +12,28 @@ SELECT first_name, emp_no, hire_date FROM employees WHERE hire_date in(
   SELECT hire_date FROM employees WHERE emp_no = 101010
 );
 
-SELECT * FROM employees WHERE first_name = 'Aamod';
-
-SELECT emp_no, title FROM titles WHERE emp_no in(
-  SELECT titles.emp_no FROM employees WHERE first_name = 'Aamod'
+SELECT * FROM employees e
+WHERE e.hire_date = (
+  SELECT hire_date FROM employees
+  WHERE emp_no = '101010'
 );
 
-SELECT emp_no, hire_date FROM employees WHERE hire_date in(
-  SELECT hire_date FROM employees WHERE emp_no = 101010
-);
+SELECT *
+FROM employees e
+INNER JOIN titles
+ON e.emp_no = titles.emp_no
+where e.first_name = 'Aamod';
+
+SELECT e.first_name, e.last_name, title
+FROM employees e, (
+  SELECT emp_no, title
+     FROM employees, titles
+     WHERE titles.emp_no = employees.emp_no
+     ) as employee_titles
+WHERE e.first_name = 'Aamod';
+
+SELECT gender, first_name, last_name
+FROM employees
+INNER JOIN dept_manager
+ON employees.emp_no = dept_manager.emp_no
+WHERE gender = 'f';
